@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarWashBer.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -12,5 +13,6 @@ namespace CarWashBer.ViewModels
         public string Username { get; set; }
         [Display(Name = "License Plate")]
         public string LicensePlate { get; set; }
+        public List<Operation> Operations { get; set; } 
     }
 }

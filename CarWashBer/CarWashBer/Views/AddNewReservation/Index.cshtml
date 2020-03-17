@@ -1,0 +1,60 @@
+﻿@model CarWashBer.ViewModels.NewReservationViewModel
+
+@{
+    ViewData["Title"] = "Add a new reservation";
+}
+
+<h1>Add a new reservation</h1>
+
+<h4>Fill the fields below</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Username" class="control-label"></label>
+                <input asp-for="Username" class="form-control" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LicensePlate" class="control-label"></label>
+                <input asp-for="LicensePlate" class="form-control" />
+                <span asp-validation-for="LicensePlate" class="text-danger"></span>
+            </div>
+
+
+
+            <div class="form-group">
+                <table>
+                    @for (var i = 0; i < Model.Operations.Count; i++)
+                    {
+                        <tr>
+                            <td>
+                                @Html.HiddenFor(x => Model.Operations[i].OperationId)
+                                @Html.DisplayFor(it => Model.Operations[i].Name)
+                            </td>
+                            <td>
+                                @Html.CheckBoxFor(it => Model.Operations[i].IsChecked)
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+
+
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Cancel</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

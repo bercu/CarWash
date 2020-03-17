@@ -56,7 +56,8 @@ namespace CarWashBer.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
                     Cost = table.Column<double>(nullable: false),
-                    TimeSpent = table.Column<int>(nullable: false)
+                    TimeSpent = table.Column<int>(nullable: false),
+                    IsChecked = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {

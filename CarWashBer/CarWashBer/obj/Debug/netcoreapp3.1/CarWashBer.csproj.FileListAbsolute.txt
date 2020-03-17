@@ -2,7 +2,6 @@ C:\Users\adibe\Desktop\Bercu Adrian\CarWashBer\CarWashBer\bin\Debug\netcoreapp3.
 C:\Users\adibe\Desktop\Bercu Adrian\CarWashBer\CarWashBer\bin\Debug\netcoreapp3.1\appsettings.json
 C:\Users\adibe\Desktop\Bercu Adrian\CarWashBer\CarWashBer\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
 C:\Users\adibe\Desktop\Bercu Adrian\CarWashBer\CarWashBer\bin\Debug\netcoreapp3.1\CarWashBer.exe
-C:\Users\adibe\Desktop\Bercu Adrian\CarWashBer\CarWashBer\obj\Debug\netcoreapp3.1\CarWashBer.csprojAssemblyReference.cache
 C:\Users\adibe\Desktop\Bercu Adrian\CarWashBer\CarWashBer\obj\Debug\netcoreapp3.1\staticwebassets\CarWashBer.StaticWebAssets.Manifest.cache
 C:\Users\adibe\Desktop\Bercu Adrian\CarWashBer\CarWashBer\obj\Debug\netcoreapp3.1\staticwebassets\CarWashBer.StaticWebAssets.xml
 C:\Users\adibe\Desktop\Bercu Adrian\CarWashBer\CarWashBer\obj\Debug\netcoreapp3.1\CarWashBer.RazorAssemblyInfo.cache
@@ -168,3 +167,10 @@ C:\Users\adibe\Desktop\Bercu Adrian\CarWashBer\CarWashBer\obj\Debug\netcoreapp3.
 C:\Users\adibe\Desktop\Bercu Adrian\CarWashBer\CarWashBer\obj\Debug\netcoreapp3.1\Razor\Views\Cars\Index.cshtml.g.cs
 C:\Users\adibe\Desktop\Bercu Adrian\CarWashBer\CarWashBer\obj\Debug\netcoreapp3.1\CarWashBer.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\adibe\Desktop\Bercu Adrian\CarWashBer\CarWashBer\obj\Debug\netcoreapp3.1\Razor\Views\AddNewCustomer\Index.cshtml.g.cs
+C:\Users\adibe\Desktop\Bercu Adrian\CarWashBer\CarWashBer\obj\Debug\netcoreapp3.1\CarWashBer.csprojAssemblyReference.cache
+C:\Users\adibe\Desktop\Bercu Adrian\CarWashBer\CarWashBer\obj\Debug\netcoreapp3.1\Razor\Views\AddNewReservation\Index.cshtml.g.cs
+C:\Users\adibe\Desktop\Bercu Adrian\CarWashBer\CarWashBer\obj\Debug\netcoreapp3.1\Razor\Views\Operations\Create.cshtml.g.cs
+C:\Users\adibe\Desktop\Bercu Adrian\CarWashBer\CarWashBer\obj\Debug\netcoreapp3.1\Razor\Views\Operations\Delete.cshtml.g.cs
+C:\Users\adibe\Desktop\Bercu Adrian\CarWashBer\CarWashBer\obj\Debug\netcoreapp3.1\Razor\Views\Operations\Details.cshtml.g.cs
+C:\Users\adibe\Desktop\Bercu Adrian\CarWashBer\CarWashBer\obj\Debug\netcoreapp3.1\Razor\Views\Operations\Edit.cshtml.g.cs
+C:\Users\adibe\Desktop\Bercu Adrian\CarWashBer\CarWashBer\obj\Debug\netcoreapp3.1\Razor\Views\Operations\Index.cshtml.g.cs

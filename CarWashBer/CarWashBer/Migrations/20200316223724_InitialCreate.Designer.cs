@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarWashBer.Migrations
 {
     [DbContext(typeof(CarWashContext))]
-    [Migration("20200309125559_InitialCreate")]
+    [Migration("20200316223724_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -109,6 +109,9 @@ namespace CarWashBer.Migrations
 
                     b.Property<double>("Cost")
                         .HasColumnType("float");
+
+                    b.Property<bool>("IsChecked")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");

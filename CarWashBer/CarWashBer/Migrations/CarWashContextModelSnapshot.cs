@@ -108,6 +108,9 @@ namespace CarWashBer.Migrations
                     b.Property<double>("Cost")
                         .HasColumnType("float");
 
+                    b.Property<bool>("IsChecked")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
