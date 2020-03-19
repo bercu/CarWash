@@ -14,6 +14,7 @@ namespace CarWashBer.DAL
         IGenericRepository<Car> CarRepository { get; }
         IGenericRepository<Operation> OperationRepository { get; }
         IGenericRepository<Gate> GateRepository { get; }
+        IGenericRepository<Reservation> ReservationRepository { get; }
         void Commit();
     }
 }

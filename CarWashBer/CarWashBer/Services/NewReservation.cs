@@ -28,11 +28,26 @@ namespace CarWashBer.Services
             return car;
         }
         
+        private List<Operation> SearchOperation(NewReservationViewModel newReservationViewModel)
+        {
+            var operations = new List<Operation>();
+            foreach(var operation in newReservationViewModel.Operations)
+            {
+                if (operation.IsChecked)
+                {
+                    var auxOperation = _unitOfWork.OperationRepository.GetById(operation.OperationId);
+                    operations.Add(auxOperation);
+                }
+            }
+            return operations;
+        }
+
         private List<OperationReservation> FindOperationReservations (Reservation reservation, List<Operation> operations)
         {
             var auxOperationReservation = new List<OperationReservation>();
             foreach (var operation in operations)
-            {
+            {             
+                operation.IsChecked = true;
                 var auxOpRes = new OperationReservation();
                 auxOpRes.Operation = operation;
                 auxOpRes.Reservation = reservation;
@@ -47,8 +62,11 @@ namespace CarWashBer.Services
         {
             reservation.Car = FindTheCar(newReservationViewModel);
             reservation.StartTime = newReservationViewModel.StartTime;
-            reservation.OperationReservations = FindOperationReservations(reservation, newReservationViewModel.Operations);
+            reservation.OperationReservations = FindOperationReservations(reservation, SearchOperation(newReservationViewModel));
             _helpNewReservation.SetUpReservation(reservation, _unitOfWork.GateRepository.GetAll().ToList());
+
+            _unitOfWork.ReservationRepository.Insert(reservation);
+            _unitOfWork.Commit();
         }
 
 

@@ -15,6 +15,7 @@ namespace CarWashBer.DAL
         public IGenericRepository<Car> CarRepository { get; }
         public IGenericRepository<Operation> OperationRepository { get; }
         public IGenericRepository<Gate> GateRepository { get; }
+        public IGenericRepository<Reservation> ReservationRepository { get; }
         public UnitOfWork(CarWashContext context)
         {
             _context = context;
@@ -22,6 +23,7 @@ namespace CarWashBer.DAL
             CarRepository = new GenericRepository<Car>(context);
             OperationRepository = new GenericRepository<Operation>(context);
             GateRepository = new GenericRepository<Gate>(context);
+            ReservationRepository = new GenericRepository<Reservation>(context);
         }
         public void Commit()
         {

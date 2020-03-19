@@ -38,12 +38,17 @@ namespace CarWashBer.Services
 
         private bool GateIsFree(Gate gate, DateTime beginning, DateTime ending)
         {
-            foreach(var reservation in gate.Reservations)
+            if (gate.Reservations == null)
+                return true;
+            else
             {
-                if((beginning>reservation.StartTime && beginning<reservation.EndTime)||
-                   (ending>reservation.StartTime && ending < reservation.EndTime))
+                foreach (var reservation in gate.Reservations)
                 {
-                    return false;
+                    if ((beginning > reservation.StartTime && beginning < reservation.EndTime) ||
+                       (ending > reservation.StartTime && ending < reservation.EndTime))
+                    {
+                        return false;
+                    }
                 }
             }
             return true;
