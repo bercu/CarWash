@@ -12,11 +12,6 @@ namespace CarWashBer.Models
     : base(options)
         { }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<OperationReservation>().HasKey(sc => new { sc.OperationId, sc.ReservationId });
-        }
-
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Car> Cars { get; set; }
         public DbSet<Customer> Customers { get; set; }
@@ -24,5 +19,10 @@ namespace CarWashBer.Models
         public DbSet<Operation> Operations { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<OperationReservation> OperationReservations { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<OperationReservation>().HasKey(sc => new { sc.OperationId, sc.ReservationId });
+        }
     }
 }

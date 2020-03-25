@@ -12,18 +12,16 @@ namespace CarWashBer.Controllers
 {
     public class AddNewReservationController : Controller
     {
-        private IUnitOfWork _unitOfWork;
         private INewReservation _newReservation;
 
-        public AddNewReservationController(IUnitOfWork unitOfWork, INewReservation newReservation)
+        public AddNewReservationController(INewReservation newReservation)
         {
-            this._unitOfWork = unitOfWork;
             this._newReservation = newReservation;
         }
         public IActionResult Index()
         {
             var auxViewModel = new NewReservationViewModel();
-            auxViewModel.Operations = _unitOfWork.OperationRepository.GetAll().ToList();
+            _newReservation.GetOperationsFromDatabase(auxViewModel);
             return View(auxViewModel);
         }
 

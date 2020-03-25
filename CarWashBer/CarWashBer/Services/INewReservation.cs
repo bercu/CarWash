@@ -9,6 +9,7 @@ namespace CarWashBer.Services
 {
     public interface INewReservation
     {
+        void GetOperationsFromDatabase(NewReservationViewModel newReservationViewModel);
         void SetUpTheReservation(Reservation reservation, NewReservationViewModel newReservationViewModel);
     }
 }

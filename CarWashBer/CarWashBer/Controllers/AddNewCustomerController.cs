@@ -11,12 +11,10 @@ namespace CarWashBer.Controllers
 {
     public class AddNewCustomerController : Controller
     {
-        private IUnitOfWork _unitOfWork;
         private INewCustomer _newCustomer;
 
-        public AddNewCustomerController(IUnitOfWork unitOfWork, INewCustomer newCustomer)
+        public AddNewCustomerController(INewCustomer newCustomer)
         {
-            this._unitOfWork = unitOfWork;
             this._newCustomer = newCustomer;
         }
 

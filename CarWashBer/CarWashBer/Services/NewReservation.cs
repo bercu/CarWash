@@ -47,7 +47,7 @@ namespace CarWashBer.Services
             var auxOperationReservation = new List<OperationReservation>();
             foreach (var operation in operations)
             {             
-                operation.IsChecked = true;
+                //operation.IsChecked = true;
                 var auxOpRes = new OperationReservation();
                 auxOpRes.Operation = operation;
                 auxOpRes.Reservation = reservation;
@@ -56,6 +56,11 @@ namespace CarWashBer.Services
             if (auxOperationReservation == null)
                 return null;
             return auxOperationReservation;
+        }
+
+        public void GetOperationsFromDatabase (NewReservationViewModel newReservationViewModel)
+        {
+            newReservationViewModel.Operations = _unitOfWork.OperationRepository.GetAll().ToList();
         }
 
         public void SetUpTheReservation(Reservation reservation, NewReservationViewModel newReservationViewModel)
