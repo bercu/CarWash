@@ -17,16 +17,15 @@ namespace CarWashBer.Services
             _unitOfWork = unitOfWork;
         }
 
-        public Customer CreateNewCustomer(NewCustomerViewModel newCustomerViewModel)
+        public Customer RegisterCustomer(RegisterViewModel registerViewModel)
         {
             Customer customer = new Customer();
-            customer.UserName = newCustomerViewModel.Username;
-            customer.Name = newCustomerViewModel.Name;
+            customer.Email = registerViewModel.Email;
 
             Car car = new Car();
-            car.Brand = newCustomerViewModel.CarBrand;
-            car.Model = newCustomerViewModel.CarModel;
-            car.LicensePlate = newCustomerViewModel.LicensePlate;
+            car.Brand = registerViewModel.CarBrand;
+            car.Model = registerViewModel.CarModel;
+            car.LicensePlate = registerViewModel.LicensePlate;
             car.Customer = customer;
 
             _unitOfWork.CustomerRepository.Insert(customer);

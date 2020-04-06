@@ -26,8 +26,22 @@ using CarWashBer.Models;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 3 "C:\Users\adibe\Desktop\Bercu Adrian\CarWashBer\CarWashBer\Views\_ViewImports.cshtml"
+using CarWashBer.ViewModels;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 4 "C:\Users\adibe\Desktop\Bercu Adrian\CarWashBer\CarWashBer\Views\_ViewImports.cshtml"
+using Microsoft.AspNetCore.Identity;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"c2770fbb6eedfc110e05794be21c4cb4164909de", @"/Views/Cars/Details.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"a5fbf9ebb35fc2466767c0d74f1cac6cc91522f8", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d625ce0de4e70bee2ac7671034c1580b060104e8", @"/Views/_ViewImports.cshtml")]
     public class Views_Cars_Details : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<CarWashBer.Models.Car>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-action", "Edit", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -114,7 +128,7 @@ using CarWashBer.Models;
 #line hidden
 #nullable disable
             WriteLiteral("\r\n        </dd>\r\n    </dl>\r\n</div>\r\n<div>\r\n    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c2770fbb6eedfc110e05794be21c4cb4164909de6013", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c2770fbb6eedfc110e05794be21c4cb4164909de6409", async() => {
                 WriteLiteral("Edit");
             }
             );
@@ -145,7 +159,7 @@ using CarWashBer.Models;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral(" |\r\n    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c2770fbb6eedfc110e05794be21c4cb4164909de8162", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c2770fbb6eedfc110e05794be21c4cb4164909de8558", async() => {
                 WriteLiteral("Back to List");
             }
             );

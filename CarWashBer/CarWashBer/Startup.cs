@@ -12,6 +12,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using CarWashBer.DAL;
 using CarWashBer.Services;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace CarWashBer
 {
@@ -32,8 +35,21 @@ namespace CarWashBer
             services.AddDbContext<CarWashContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
 
+            services.AddIdentity<Customer, IdentityRole>(options =>
+                options.Password.RequireNonAlphanumeric = false)
+                .AddEntityFrameworkStores<CarWashContext>();
+
+            services.AddMvc(options =>
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                                .RequireAuthenticatedUser()
+                                .Build();
+                options.Filters.Add(new AuthorizeFilter(policy));
+            }).AddXmlDataContractSerializerFormatters();
+
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<INewCustomer, NewCustomer>();
+            services.AddTransient<IManageCars, ManageCars>();
             services.AddScoped<IHelpNewReservation, HelpNewReservation>();
             services.AddTransient<INewReservation, NewReservation>();
         }
@@ -56,6 +72,7 @@ namespace CarWashBer
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CarWashBer.Models
 {
-    public class CarWashContext:DbContext
+    public class CarWashContext:IdentityDbContext<Customer>
     {
         public CarWashContext(DbContextOptions<CarWashContext> options)
     : base(options)
@@ -14,7 +15,6 @@ namespace CarWashBer.Models
 
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Car> Cars { get; set; }
-        public DbSet<Customer> Customers { get; set; }
         public DbSet<Gate> Gates { get; set; }
         public DbSet<Operation> Operations { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
@@ -22,6 +22,7 @@ namespace CarWashBer.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<OperationReservation>().HasKey(sc => new { sc.OperationId, sc.ReservationId });
         }
     }
