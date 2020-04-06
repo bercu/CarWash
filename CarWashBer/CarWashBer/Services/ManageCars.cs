@@ -1,5 +1,6 @@
 ﻿using CarWashBer.DAL;
 using CarWashBer.Models;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,27 +8,27 @@ using System.Threading.Tasks;
 
 namespace CarWashBer.Services
 {
-    public class ManageCars:IManageCars
+    public class ManageCars : IManageCars
     {
 
         private readonly IUnitOfWork _unitOfWork;
+        private readonly UserManager<Customer> _userManager;
 
-        public ManageCars(IUnitOfWork unitOfWork)
+        public ManageCars(IUnitOfWork unitOfWork, 
+                          UserManager<Customer> userManager)
         {
             _unitOfWork = unitOfWork;
+            _userManager = userManager;
         }
 
-        private bool CarExists(int id)
-        {
-            if (GetCarById(id) == null)
-                return false;
-            else
-                return true;
-        }
-
-        public List<Car> GetCars()
+        public IEnumerable<Car> GetCars()
         {
             return _unitOfWork.CarRepository.GetAll().ToList();
+        }
+
+        public IEnumerable<Car> GetUserCars(Customer customer)
+        {            
+            return _unitOfWork.CarRepository.GetAll().Where(x=>x.Customer==customer).ToList();
         }
 
         public Car GetCarById(int? id)
@@ -46,32 +47,23 @@ namespace CarWashBer.Services
             return car;
         }
 
-        public void AddCar(Car car)
+        public void AddCar(Car car,Customer customer)
         {
+            car.Customer = customer;
             _unitOfWork.CarRepository.Insert(car);
             _unitOfWork.Commit();
         }
 
-
-        public bool CanEditCar(int id, Car car)
-        {
-            if (id != car.CarId)
-            {
-                return false;
-            }
-            if (CarExists(car.CarId)) {
-                _unitOfWork.CarRepository.Update(car);
-                _unitOfWork.CarRepository.Save();
-                return true;
-            }
-            return false;
-        }
-
         public void DeleteCarById(int id)
         {
-            var car = GetCarById(id);
-            _unitOfWork.CarRepository.Delete(car);
-            _unitOfWork.CarRepository.Save();
+            _unitOfWork.CarRepository.Delete(id);
+            _unitOfWork.Commit();
+        }
+
+        public void UpdateCar(int id, Car car)
+        {
+            _unitOfWork.CarRepository.Update(car);
+            _unitOfWork.Commit();
         }
     }
 }

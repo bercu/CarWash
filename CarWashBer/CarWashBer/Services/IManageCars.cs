@@ -1,22 +1,23 @@
 ﻿using CarWashBer.Models;
-using System;
+using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CarWashBer.Services
 {
     public interface IManageCars
     {
 
-        List<Car> GetCars();
+        IEnumerable<Car> GetCars();
+
+        IEnumerable<Car> GetUserCars(Customer customer);
 
         Car GetCarById(int? id);
 
-        void AddCar(Car car);
-
-        bool CanEditCar(int id, Car car);
+        void AddCar(Car car,Customer customer);
 
         void DeleteCarById(int id);
+
+        void UpdateCar(int id, Car car);
+                
     }
 }

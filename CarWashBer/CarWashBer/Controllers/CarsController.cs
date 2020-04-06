@@ -7,26 +7,31 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CarWashBer.Models;
 using CarWashBer.Services;
+using Microsoft.AspNetCore.Identity;
 
 namespace CarWashBer.Controllers
 {
     public class CarsController : Controller
     {
-        private IManageCars _newManagedCar;
+        private IManageCars _manageCars;
+        private readonly UserManager<Customer> _userManager;
 
-        public CarsController(IManageCars newManagedCar)
+        public CarsController(IManageCars manageCars,
+                              UserManager<Customer> userManager)
         {
-            this._newManagedCar = newManagedCar;
+            this._manageCars = manageCars;
+            this._userManager = userManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(_newManagedCar.GetCars());
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            return View(_manageCars.GetUserCars(user));
         }
 
         public IActionResult Details(int? id)
         {
-            var car = _newManagedCar.GetCarById(id);
+            var car = _manageCars.GetCarById(id);
             return View(car);
         }
 
@@ -37,11 +42,12 @@ namespace CarWashBer.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("CarId,Brand,Model,LicensePlate")] Car car)
+        public async Task<IActionResult> Create([Bind("CarId,Brand,Model,LicensePlate")] Car car)
         {
             if (ModelState.IsValid)
             {
-                _newManagedCar.AddCar(car);
+                var user = await _userManager.GetUserAsync(HttpContext.User);
+                _manageCars.AddCar(car,user);
                 return RedirectToAction(nameof(Index));
             }
             return View(car);
@@ -49,7 +55,7 @@ namespace CarWashBer.Controllers
 
         public IActionResult Edit(int? id)
         {
-            var car = _newManagedCar.GetCarById(id);
+            var car = _manageCars.GetCarById(id);
             return View(car);
         }
 
@@ -57,18 +63,22 @@ namespace CarWashBer.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, [Bind("CarId,Brand,Model,LicensePlate")] Car car)
         {
+            if (id != car.CarId)
+            {
+                return NotFound();
+            }
+
             if (ModelState.IsValid)
             {
-                if(_newManagedCar.CanEditCar(id,car))
-                    return RedirectToAction(nameof(Index));
+                _manageCars.UpdateCar(id, car);
+                return RedirectToAction(nameof(Index));
             }
             return View(car);
         }
 
         public IActionResult Delete(int? id)
         {
-            var car = _newManagedCar.GetCarById(id);
-
+            var car = _manageCars.GetCarById(id);
             return View(car);
         }
 
@@ -76,7 +86,7 @@ namespace CarWashBer.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            _newManagedCar.DeleteCarById(id);
+            _manageCars.DeleteCarById(id);
             return RedirectToAction(nameof(Index));
         }
     }
