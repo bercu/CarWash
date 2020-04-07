@@ -45,14 +45,14 @@ namespace CarWashBer.Controllers
         public async Task<IActionResult> Register(RegisterViewModel registerViewModel)
         {
             if (ModelState.IsValid)
-            {
-                var customer = _newCustomer.RegisterCustomer(registerViewModel);
-                var user = new Customer { UserName=customer.Email, Email = customer.Email };
+            {                
+                var user = new Customer { UserName=registerViewModel.Email, Email = registerViewModel.Email  };
                 var result = await userManager.CreateAsync(user, registerViewModel.Password);
                 var result2 = await userManager.AddToRoleAsync(user, "user");
                 if (result.Succeeded&&result2.Succeeded)
-                {
+                {                    
                     await signInManager.SignInAsync(user, isPersistent: false);
+                    _newCustomer.RegisterCarForNewCustomer(user,registerViewModel);
                     return RedirectToAction("Index", "Home");
                 }
 

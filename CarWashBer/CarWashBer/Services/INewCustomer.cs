@@ -9,6 +9,6 @@ namespace CarWashBer.Services
 {
     public interface INewCustomer
     {
-        Customer RegisterCustomer(RegisterViewModel registerViewModel);
+        void RegisterCarForNewCustomer(Customer customer, RegisterViewModel registerViewModel);
     }
 }
