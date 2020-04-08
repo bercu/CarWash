@@ -22,7 +22,7 @@ namespace CarWashBer.Services
         private Car FindTheCar(NewReservationViewModel newReservationViewModel)
         {            
             var cars = _unitOfWork.CarRepository.GetAll().ToList();
-            var car = cars.FirstOrDefault(aux => aux.LicensePlate == newReservationViewModel.LicensePlate);
+            var car = cars.FirstOrDefault(aux => aux.CarId == newReservationViewModel.CarId);
             if (car == null)
                 return null;
             return car;

@@ -15,22 +15,22 @@ namespace CarWashBer.Controllers
     public class AccountController : Controller
     {
         private INewCustomer _newCustomer;
-        private readonly UserManager<Customer> userManager;
-        private readonly SignInManager<Customer> signInManager;
+        private readonly UserManager<Customer> _userManager;
+        private readonly SignInManager<Customer> _signInManager;
 
         public AccountController(INewCustomer newCustomer, 
                                  UserManager<Customer> userManager, 
                                  SignInManager<Customer> signInManager)
         {
             this._newCustomer = newCustomer;
-            this.userManager = userManager;
-            this.signInManager = signInManager;
+            this._userManager = userManager;
+            this._signInManager = signInManager;
         }
 
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
-            await signInManager.SignOutAsync();
+            await _signInManager.SignOutAsync();
             return RedirectToAction("index", "home");
         }
 
@@ -47,11 +47,11 @@ namespace CarWashBer.Controllers
             if (ModelState.IsValid)
             {                
                 var user = new Customer { UserName=registerViewModel.Email, Email = registerViewModel.Email  };
-                var result = await userManager.CreateAsync(user, registerViewModel.Password);
-                var result2 = await userManager.AddToRoleAsync(user, "user");
+                var result = await _userManager.CreateAsync(user, registerViewModel.Password);
+                var result2 = await _userManager.AddToRoleAsync(user, "user");
                 if (result.Succeeded&&result2.Succeeded)
                 {                    
-                    await signInManager.SignInAsync(user, isPersistent: false);
+                    await _signInManager.SignInAsync(user, isPersistent: false);
                     _newCustomer.RegisterCarForNewCustomer(user,registerViewModel);
                     return RedirectToAction("Index", "Home");
                 }
@@ -76,7 +76,7 @@ namespace CarWashBer.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await signInManager.PasswordSignInAsync(loginViewModel.Email, loginViewModel.Password,
+                var result = await _signInManager.PasswordSignInAsync(loginViewModel.Email, loginViewModel.Password,
                                                                      loginViewModel.RememberMe, false);
 
                 if (result.Succeeded)

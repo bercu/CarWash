@@ -8,11 +8,16 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
             <div class="form-group">
-                <label asp-for="LicensePlate" class="control-label"></label>
-                <input asp-for="LicensePlate" class="form-control" />
-                <span asp-validation-for="LicensePlate" class="text-danger"></span>
+                <label asp-for="CarId" class="control-label"></label>
+                <div class="col-sd-10">
+                    @Html.DropDownListFor(o => o.CarId,
+                    new SelectList(ViewBag.CarsList, "CarId", "LicensePlate"))
+                </div>
+                <span asp-validation-for="CarId" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <table>
                     @for (var i = 0; i < Model.Operations.Count; i++)
@@ -33,7 +38,7 @@
                 <label asp-for="StartTime" class="control-label"></label>
                 <input asp-for="StartTime" class="form-control" />
                 <span asp-validation-for="StartTime" class="text-danger"></span>
-            </div>                        
+            </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

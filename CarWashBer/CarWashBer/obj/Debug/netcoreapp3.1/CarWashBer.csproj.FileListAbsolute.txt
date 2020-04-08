@@ -174,3 +174,4 @@ C:\Users\adibe\Desktop\Bercu Adrian\CarWashBer\CarWashBer\obj\Debug\netcoreapp3.
 C:\Users\adibe\Desktop\Bercu Adrian\CarWashBer\CarWashBer\obj\Debug\netcoreapp3.1\Razor\Views\Cars\Details.cshtml.g.cs
 C:\Users\adibe\Desktop\Bercu Adrian\CarWashBer\CarWashBer\obj\Debug\netcoreapp3.1\Razor\Views\Cars\Edit.cshtml.g.cs
 C:\Users\adibe\Desktop\Bercu Adrian\CarWashBer\CarWashBer\obj\Debug\netcoreapp3.1\Razor\Views\Cars\Index.cshtml.g.cs
+C:\Users\adibe\Desktop\Bercu Adrian\CarWashBer\CarWashBer\obj\Debug\netcoreapp3.1\CarWashBer.csprojAssemblyReference.cache
