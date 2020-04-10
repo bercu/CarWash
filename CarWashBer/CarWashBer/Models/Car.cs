@@ -13,6 +13,7 @@ namespace CarWashBer.Models
         public Customer Customer { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }
+        [Display(Name ="License Plate")]
         public string LicensePlate { get; set; }
         public List<Reservation> Reservations { get; set; }
     }

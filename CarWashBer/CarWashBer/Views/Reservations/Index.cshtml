@@ -1,0 +1,51 @@
+﻿@model IEnumerable<CarWashBer.Models.Reservation>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Your reservations</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Car.LicensePlate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cost)
+            </th>
+            <th>
+                <a asp-action="Create">Create New</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Car.LicensePlate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cost)
+            </td>
+            <td>
+                <a asp-action="Delete" asp-route-id="@item.ReservationId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

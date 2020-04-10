@@ -4,11 +4,9 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Your cars</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
 <table class="table">
     <thead>
         <tr>
@@ -21,7 +19,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.LicensePlate)
             </th>
-            <th></th>
+            <th>
+                <a asp-action="Create">Add New</a>
+            </th>
         </tr>
     </thead>
     <tbody>

@@ -58,11 +58,6 @@ namespace CarWashBer.Services
             return auxOperationReservation;
         }
 
-        public void GetOperationsFromDatabase (NewReservationViewModel newReservationViewModel)
-        {
-            newReservationViewModel.Operations = _unitOfWork.OperationRepository.GetAll().ToList();
-        }
-
         public void SetUpTheReservation(Reservation reservation, NewReservationViewModel newReservationViewModel)
         {
             reservation.Car = FindTheCar(newReservationViewModel);

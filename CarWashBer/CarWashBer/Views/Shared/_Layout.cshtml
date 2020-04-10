@@ -25,7 +25,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Cars" asp-action="Index">Manage Cars</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="AddNewReservation" asp-action="Index">New Reservation</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Reservations" asp-action="Index">Manage Reservations</a>
                         </li>
                         @if (signInManager.IsSignedIn(User) && User.IsInRole("admin"))
                         {
