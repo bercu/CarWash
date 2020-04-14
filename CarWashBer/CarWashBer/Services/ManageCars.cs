@@ -56,6 +56,11 @@ namespace CarWashBer.Services
 
         public void DeleteCarById(int id)
         {
+            foreach(var reservation in _unitOfWork.ReservationRepository.GetAll().ToList())
+            {
+                if (reservation.Car!=null && reservation.Car.CarId == id)
+                    _unitOfWork.ReservationRepository.Delete(reservation.ReservationId);
+            }
             _unitOfWork.CarRepository.Delete(id);
             _unitOfWork.Commit();
         }
