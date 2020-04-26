@@ -4,14 +4,16 @@ using CarWashBer.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CarWashBer.Migrations
 {
     [DbContext(typeof(CarWashContext))]
-    partial class CarWashContextModelSnapshot : ModelSnapshot
+    [Migration("20200423192951_CarUpdate")]
+    partial class CarUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -382,7 +384,7 @@ namespace CarWashBer.Migrations
             modelBuilder.Entity("CarWashBer.Models.Car", b =>
                 {
                     b.HasOne("CarWashBer.Models.CarModel", "CarModel")
-                        .WithMany("Cars")
+                        .WithMany()
                         .HasForeignKey("CarModelId");
 
                     b.HasOne("CarWashBer.Models.Customer", "Customer")

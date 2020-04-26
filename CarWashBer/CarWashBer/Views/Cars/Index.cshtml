@@ -11,10 +11,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Brand)
+                @Html.DisplayNameFor(model => model.CarModel.CarBrand.BrandName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Model)
+                @Html.DisplayNameFor(model => model.CarModel.ModelName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.LicensePlate)
@@ -28,17 +28,15 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Brand)
+                @Html.DisplayFor(modelItem => item.CarModel.CarBrand.BrandName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Model)
+                @Html.DisplayFor(modelItem => item.CarModel.ModelName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.LicensePlate)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.CarId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CarId">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.CarId">Delete</a>
             </td>
         </tr>

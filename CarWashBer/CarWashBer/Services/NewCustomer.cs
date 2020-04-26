@@ -20,8 +20,8 @@ namespace CarWashBer.Services
         public void RegisterCarForNewCustomer(Customer customer, RegisterViewModel registerViewModel)
         {
             Car car = new Car();
-            car.Brand = registerViewModel.CarBrand;
-            car.Model = registerViewModel.CarModel;
+            car.CarModel.CarBrand.BrandName = registerViewModel.CarBrand;
+            car.CarModel.ModelName = registerViewModel.CarModel;
             car.LicensePlate = registerViewModel.LicensePlate;
             car.Customer = customer;
 

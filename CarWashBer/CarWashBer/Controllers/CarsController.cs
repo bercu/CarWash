@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CarWashBer.Models;
 using CarWashBer.Services;
 using Microsoft.AspNetCore.Identity;
+using CarWashBer.ViewModels;
 
 namespace CarWashBer.Controllers
 {
@@ -37,24 +38,26 @@ namespace CarWashBer.Controllers
 
         public IActionResult Create()
         {
+            ViewBag.ListOfBrands = _manageCars.GetCarBrands();
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CarId,Brand,Model,LicensePlate")] Car car)
+        public async Task<IActionResult> Create(CarViewModel carViewModel)
         {
             if (ModelState.IsValid)
             {
                 var user = await _userManager.GetUserAsync(HttpContext.User);
-                _manageCars.AddCar(car,user);
+                _manageCars.AddCar(user,carViewModel);
                 return RedirectToAction(nameof(Index));
             }
-            return View(car);
+            return View(carViewModel);
         }
 
         public IActionResult Edit(int? id)
         {
+            ViewBag.ListOfBrands = _manageCars.GetCarBrands();
             var car = _manageCars.GetCarById(id);
             return View(car);
         }
@@ -88,6 +91,13 @@ namespace CarWashBer.Controllers
         {
             _manageCars.DeleteCarById(id);
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public JsonResult GetModelsList(int id)
+        {
+            var CarModelsList = new SelectList(_manageCars.GetCarModelsByCarBrandId(id), "CarModelId", "ModelName");
+            return Json(CarModelsList);
         }
     }
 }

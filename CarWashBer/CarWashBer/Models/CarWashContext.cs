@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CarWashBer.Models;
 
 namespace CarWashBer.Models
 {
@@ -25,5 +26,9 @@ namespace CarWashBer.Models
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<OperationReservation>().HasKey(sc => new { sc.OperationId, sc.ReservationId });
         }
+
+        public DbSet<CarWashBer.Models.CarModel> CarModel { get; set; }
+
+        public DbSet<CarWashBer.Models.CarBrand> CarBrand { get; set; }
     }
 }
