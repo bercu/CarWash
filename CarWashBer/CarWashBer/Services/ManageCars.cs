@@ -76,6 +76,15 @@ namespace CarWashBer.Services
             return car;
         }
 
+        public CarViewModel ConvertToCarViewModel(RegisterViewModel registerViewModel)
+        {
+            CarViewModel carViewModel = new CarViewModel();
+            carViewModel.CarBrandId = registerViewModel.CarBrandId;
+            carViewModel.CarModelId = registerViewModel.CarModelId;
+            carViewModel.LicensePlate = registerViewModel.LicensePlate;
+            return carViewModel;
+        }
+
         private Car MapCarFromViewModel(CarViewModel carViewModel)
         {
             var car = new Car();
@@ -96,7 +105,6 @@ namespace CarWashBer.Services
         {
             var car = MapCarFromViewModel(carViewModel);
             car.Customer = customer;
-            //car.CarModel.Cars.Add(car);
             _unitOfWork.CarRepository.Insert(car);
             _unitOfWork.Commit();
         }

@@ -19,10 +19,10 @@ namespace CarWashBer.ViewModels
         [Display(Name = "Confirm Password")]
         [Compare("Password",ErrorMessage = "Password and confirmation password don't match")]
         public string ConfirmPassword { get; set; }
-        [Display(Name ="Car Brand")]
-        public string CarBrand { get; set; }
-        [Display(Name="Car Model")]
-        public string CarModel { get; set; }
+        [Display(Name = "Car Brand")]
+        public int CarBrandId { get; set; }
+        [Display(Name = "Car Model")]
+        public int CarModelId { get; set; }
         [Required]
         [Display(Name="License Plate")]
         public string LicensePlate { get; set; }

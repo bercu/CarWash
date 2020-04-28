@@ -24,15 +24,15 @@
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label asp-for="CarBrand" class="control-label"></label>
-                    <input asp-for="CarBrand" class="form-control" />
-                    <span asp-validation-for="CarBrand" class="text-danger"></span>
+                <div class="form-group">
+                    <label asp-for="CarBrandId"></label>
+                    <select asp-for="CarBrandId" asp-items="@(new SelectList(ViewBag.ListOfBrands,"CarBrandId","BrandName"))" class="form-control" id="ListOfBrands"></select>
+                    <span asp-validation-for="CarBrandId" class="text-danger"></span>
                 </div>
-                <div class="form-group col-md-6">
-                    <label asp-for="CarModel" class="control-label"></label>
-                    <input asp-for="CarModel" class="form-control" />
-                    <span asp-validation-for="CarModel" class="text-danger"></span>
+                <div class="form-group">
+                    <label asp-for="CarModelId"></label>
+                    <select asp-for="CarModelId" asp-items="@(new SelectList(string.Empty,"CarModelId","ModelName"))" class="form-control" id="ListOfModels"></select>
+                    <span asp-validation-for="CarModelId" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group">
@@ -52,4 +52,30 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var items = "<option value='0'>Select</option>";
+            $("#ListOfModels").html(items);
+        });
+    </script>
+
+    <script>
+        $("#ListOfBrands").change(function () {
+
+            var carBrandId = $("#ListOfBrands").val();
+            var url = "/Account/GetModelsList";
+
+            $.getJSON(url, { id: carBrandId }, function (data) {
+                var item = "";
+                $("#ListOfModels").empty();
+                $.each(data, function (i, CarModel) {
+                    item += "<option value='" + CarModel.value + "'>" + CarModel.text + "</option>"
+                });
+                $("#ListOfModels").html(item);
+            });
+        });
+    </script>
+
 }

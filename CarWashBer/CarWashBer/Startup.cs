@@ -48,7 +48,6 @@ namespace CarWashBer
             }).AddXmlDataContractSerializerFormatters();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<INewCustomer, NewCustomer>();
             services.AddTransient<IManageCars, ManageCars>();
             services.AddScoped<IHelpNewReservation, HelpNewReservation>();
             services.AddScoped<INewReservation, NewReservation>();

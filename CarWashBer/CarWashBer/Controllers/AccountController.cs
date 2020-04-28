@@ -8,23 +8,24 @@ using CarWashBer.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CarWashBer.Controllers
 {
     [AllowAnonymous]
     public class AccountController : Controller
     {
-        private INewCustomer _newCustomer;
+        private IManageCars _manageCars;
         private readonly UserManager<Customer> _userManager;
         private readonly SignInManager<Customer> _signInManager;
 
-        public AccountController(INewCustomer newCustomer, 
-                                 UserManager<Customer> userManager, 
-                                 SignInManager<Customer> signInManager)
+        public AccountController(UserManager<Customer> userManager, 
+                                 SignInManager<Customer> signInManager,
+                                 IManageCars manageCars)
         {
-            this._newCustomer = newCustomer;
             this._userManager = userManager;
             this._signInManager = signInManager;
+            this._manageCars = manageCars;
         }
 
         [HttpPost]
@@ -37,6 +38,7 @@ namespace CarWashBer.Controllers
         [HttpGet]
         public IActionResult Register()
         {
+            ViewBag.ListOfBrands = _manageCars.GetCarBrands();
             return View();
         }
 
@@ -52,7 +54,8 @@ namespace CarWashBer.Controllers
                 if (result.Succeeded&&result2.Succeeded)
                 {                    
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    _newCustomer.RegisterCarForNewCustomer(user,registerViewModel);
+                    var carViewModel = _manageCars.ConvertToCarViewModel(registerViewModel);
+                    _manageCars.AddCar(user, carViewModel);
                     return RedirectToAction("Index", "Home");
                 }
 
@@ -92,6 +95,12 @@ namespace CarWashBer.Controllers
             return View(loginViewModel);
         }
 
+        [HttpGet]
+        public JsonResult GetModelsList(int id)
+        {
+            var CarModelsList = new SelectList(_manageCars.GetCarModelsByCarBrandId(id), "CarModelId", "ModelName");
+            return Json(CarModelsList);
+        }
 
     }
 }

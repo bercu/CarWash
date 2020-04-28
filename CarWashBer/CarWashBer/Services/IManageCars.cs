@@ -15,6 +15,7 @@ namespace CarWashBer.Services
         IEnumerable<Car> GetUserCars(Customer customer);
 
         Car GetCarById(int? id);
+        CarViewModel ConvertToCarViewModel(RegisterViewModel registerViewModel);
 
         void AddCar(Customer customer, CarViewModel carViewModel);
 
