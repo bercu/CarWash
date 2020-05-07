@@ -52,6 +52,7 @@ namespace CarWashBer
             services.AddScoped<IHelpNewReservation, HelpNewReservation>();
             services.AddScoped<INewReservation, NewReservation>();
             services.AddTransient<IManageReservations, ManageReservations>();
+            services.AddTransient<IManageOperations, ManageOperations>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
