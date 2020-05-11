@@ -12,20 +12,22 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CarWashBer.Controllers
 {
-    [AllowAnonymous]
     public class AccountController : Controller
     {
         private IManageCars _manageCars;
+        private IManageAccount _manageAccount;
         private readonly UserManager<Customer> _userManager;
         private readonly SignInManager<Customer> _signInManager;
 
         public AccountController(UserManager<Customer> userManager, 
                                  SignInManager<Customer> signInManager,
-                                 IManageCars manageCars)
+                                 IManageCars manageCars,
+                                 IManageAccount manageAccount)
         {
             this._userManager = userManager;
             this._signInManager = signInManager;
             this._manageCars = manageCars;
+            this._manageAccount = manageAccount;
         }
 
         [HttpPost]
@@ -35,6 +37,7 @@ namespace CarWashBer.Controllers
             return RedirectToAction("index", "home");
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Register()
         {
@@ -42,6 +45,7 @@ namespace CarWashBer.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel registerViewModel)
@@ -67,12 +71,14 @@ namespace CarWashBer.Controllers
             return View(registerViewModel);
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Login()
         {
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LogInViewModel loginViewModel, string returnUrl)
@@ -95,11 +101,84 @@ namespace CarWashBer.Controllers
             return View(loginViewModel);
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public JsonResult GetModelsList(int id)
         {
             var CarModelsList = new SelectList(_manageCars.GetCarModelsByCarBrandId(id), "CarModelId", "ModelName");
             return Json(CarModelsList);
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            return View(user);
+        }
+
+        [HttpGet]
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel changePasswordViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.GetUserAsync(User);
+                if (user == null)
+                {
+                    return RedirectToAction("Login");
+                }
+
+                var result = await _userManager.ChangePasswordAsync(user,
+                    changePasswordViewModel.CurrentPassword, changePasswordViewModel.NewPassword);
+
+                if (!result.Succeeded)
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                    return View();
+                }
+
+                await _signInManager.RefreshSignInAsync(user);
+                return RedirectToAction("index", "home");
+            }
+
+            return View(changePasswordViewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteAccount()
+        {
+            var user = await _userManager.GetUserAsync(User);
+
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User cannot be found";
+                return View("NotFound");
+            }
+            else
+            {
+                await _signInManager.SignOutAsync();
+                _manageAccount.DeleteUserCarsAndReservations(user);
+                var result = await _userManager.DeleteAsync(user);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("index","home");
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+
+                return RedirectToAction("index","home");
+            }
         }
 
     }

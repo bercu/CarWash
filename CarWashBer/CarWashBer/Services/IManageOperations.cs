@@ -9,6 +9,7 @@ namespace CarWashBer.Services
     public interface IManageOperations
     {
         IEnumerable<Operation> GetOperations();
+
         Operation GetOperationById(int? id);
 
         void AddOperation(Operation operation);

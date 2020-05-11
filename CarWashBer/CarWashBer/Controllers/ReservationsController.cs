@@ -28,7 +28,7 @@ namespace CarWashBer.Controllers
         public async Task<IActionResult> Index()
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
-            return View(_manageReservations.GetUserReservations(user));
+            return View(_manageReservations.GetUserFutureReservations(user));
         }
 
         public IActionResult Details(int? id)

@@ -29,9 +29,8 @@ namespace CarWashBer.Services
             return _unitOfWork.ReservationRepository.GetAll().ToList();
         }
 
-        public IEnumerable<Reservation> GetUserReservations(Customer customer)
-        {
-            var reservations = _unitOfWork.ReservationRepository.GetAll().ToList();
+        private IEnumerable<Reservation> GetUserReservations(Customer customer, List<Reservation> reservations)
+        {            
             var cars = _unitOfWork.CarRepository.GetAll().Where(x => x.Customer == customer).ToList();
             var userReservations = new List<Reservation>();
             foreach(var reservation in reservations)
@@ -40,6 +39,18 @@ namespace CarWashBer.Services
                     userReservations.Add(reservation);
             }
             return userReservations;
+        }
+
+        public IEnumerable<Reservation> GetUserFutureReservations(Customer customer)
+        {
+            var reservations = _unitOfWork.ReservationRepository.GetAll().Where(x => x.EndTime > DateTime.Now).ToList();
+            return GetUserReservations(customer, reservations);
+        }
+
+        public IEnumerable<Reservation> GetUserOldReservations(Customer customer)
+        {
+            var reservations = _unitOfWork.ReservationRepository.GetAll().Where(x => x.EndTime <= DateTime.Now).ToList();
+            return GetUserReservations(customer, reservations);
         }
 
         public Reservation GetReservationById(int? id)

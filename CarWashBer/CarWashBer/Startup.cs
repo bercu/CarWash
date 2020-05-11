@@ -51,6 +51,7 @@ namespace CarWashBer
             services.AddTransient<IManageCars, ManageCars>();
             services.AddScoped<IHelpNewReservation, HelpNewReservation>();
             services.AddScoped<INewReservation, NewReservation>();
+            services.AddTransient<IManageAccount, ManageAccount>();
             services.AddTransient<IManageReservations, ManageReservations>();
             services.AddTransient<IManageOperations, ManageOperations>();
         }

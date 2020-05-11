@@ -13,13 +13,10 @@ namespace CarWashBer.Services
     {
 
         private readonly IUnitOfWork _unitOfWork;
-        private readonly UserManager<Customer> _userManager;
 
-        public ManageCars(IUnitOfWork unitOfWork, 
-                          UserManager<Customer> userManager)
+        public ManageCars(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _userManager = userManager;
         }
 
         public IEnumerable<Car> GetCars()

@@ -11,7 +11,9 @@ namespace CarWashBer.Services
     {
         IEnumerable<Reservation> GetReservations();
 
-        IEnumerable<Reservation> GetUserReservations(Customer customer);
+        IEnumerable<Reservation> GetUserFutureReservations(Customer customer);
+
+        IEnumerable<Reservation> GetUserOldReservations(Customer customer);
 
         Reservation GetReservationById(int? id);
 
